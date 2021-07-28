@@ -4,20 +4,21 @@
 # How to use
 
 To get started, you need to create your telegram bot. Use [@BotFather](https://t.me/BotFather) and follow his instructions.
-After creating, BotFather will give you bot token. This token copy to Bot token textbox
+After creating, BotFather will give you bot token. This token you need to copy to Bot token textbox
+Then, using [@username_to_id_bot](https://t.me/username_to_id_bot) get chat ID and paste it into Chat ID textbox
 
-Next, add folders
+### Next, add folders
 Use Add folder and Remove folder buttons to add images to the list. It will also show you number of found images.
 
-Then, select timeout
-Using arrows of numpad, enter amount of minutes to Post every textbox.
+### Then, select timeout
+Using arrows or numpad, enter amount of minutes to Post every textbox.
 
-Select options
+### Select options
 Check Notify when image is posted to receive a notification, when bot posts image.
 
-And... here we go
+### And... here we go
 Click Start posting to begin. Seconds until next post will show you time until next image.
-You can click Minimize to tray, to hide program in system tray. To show it up again, locate it icon in tray and double click it.
+You can click Minimize to tray, to hide program in system tray. To show it up again, locate its icon in tray and double click it.
 You can also click Post image now, to post image ahead the timer.
 
 ![Screenshot](/images/screen.png)
