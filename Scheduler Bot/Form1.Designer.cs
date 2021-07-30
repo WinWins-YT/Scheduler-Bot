@@ -40,11 +40,14 @@ namespace Scheduler_Bot
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.imgNum = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.folderList = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.secTxt = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.notifyPost = new System.Windows.Forms.CheckBox();
@@ -52,11 +55,8 @@ namespace Scheduler_Bot
             this.label6 = new System.Windows.Forms.Label();
             this.timeTxt = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label8 = new System.Windows.Forms.Label();
-            this.secTxt = new System.Windows.Forms.Label();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -130,6 +130,7 @@ namespace Scheduler_Bot
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.imgNum);
             this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.folderList);
@@ -146,7 +147,7 @@ namespace Scheduler_Bot
             this.imgNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imgNum.Location = new System.Drawing.Point(427, 58);
             this.imgNum.Name = "imgNum";
-            this.imgNum.Size = new System.Drawing.Size(100, 56);
+            this.imgNum.Size = new System.Drawing.Size(100, 29);
             this.imgNum.TabIndex = 4;
             this.imgNum.Text = "0";
             this.imgNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -161,10 +162,20 @@ namespace Scheduler_Bot
             this.label4.TabIndex = 3;
             this.label4.Text = "Detected images:";
             // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(428, 127);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Images posted: 0";
+            // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(428, 117);
+            this.button2.Location = new System.Drawing.Point(428, 101);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 23);
             this.button2.TabIndex = 2;
@@ -198,9 +209,9 @@ namespace Scheduler_Bot
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.secTxt);
             this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.notifyPost);
@@ -215,14 +226,36 @@ namespace Scheduler_Bot
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Post settings";
             // 
-            // label7
+            // button6
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(322, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Images posted: 0";
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(322, 48);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(113, 23);
+            this.button6.TabIndex = 10;
+            this.button6.Text = "Show info";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // secTxt
+            // 
+            this.secTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.secTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secTxt.Location = new System.Drawing.Point(443, 45);
+            this.secTxt.Name = "secTxt";
+            this.secTxt.Size = new System.Drawing.Size(78, 23);
+            this.secTxt.TabIndex = 9;
+            this.secTxt.Text = "0";
+            this.secTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.Location = new System.Drawing.Point(444, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 30);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Seconds until next post";
             // 
             // button5
             // 
@@ -237,6 +270,7 @@ namespace Scheduler_Bot
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.Location = new System.Drawing.Point(158, 48);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(158, 23);
@@ -301,10 +335,6 @@ namespace Scheduler_Bot
             this.label5.TabIndex = 0;
             this.label5.Text = "Post every:";
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -314,28 +344,10 @@ namespace Scheduler_Bot
             this.notifyIcon.Text = "Bot is working...";
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
-            // label8
+            // timer1
             // 
-            this.label8.Location = new System.Drawing.Point(444, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 30);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Seconds until next post";
-            // 
-            // secTxt
-            // 
-            this.secTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.secTxt.Location = new System.Drawing.Point(443, 45);
-            this.secTxt.Name = "secTxt";
-            this.secTxt.Size = new System.Drawing.Size(78, 23);
-            this.secTxt.TabIndex = 9;
-            this.secTxt.Text = "0";
-            this.secTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // timer2
-            // 
-            this.timer2.Interval = 1000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -380,7 +392,6 @@ namespace Scheduler_Bot
         private System.Windows.Forms.NumericUpDown timeTxt;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.CheckBox notifyPost;
@@ -388,7 +399,8 @@ namespace Scheduler_Bot
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label secTxt;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button6;
     }
 }
 

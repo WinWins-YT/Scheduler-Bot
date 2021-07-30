@@ -45,8 +45,7 @@ namespace Scheduler_Bot
                     imgNum.Text = GetFilesNum().ToString();
                     bot = new TelegramBotClient(Settings.Default.token);
                     chatId = new ChatId(Settings.Default.chatId);
-                    timer1.Interval = Settings.Default.timer * 60 * 1000;
-                    seconds = timer1.Interval / 1000;
+                    seconds = Settings.Default.timer * 60;
                     if (GetFiles(folder).Length == file)
                     {
                         folder++;
@@ -54,8 +53,11 @@ namespace Scheduler_Bot
                     }
                     if (folderList.Items.Count > folder)
                     {
-                        PostImage(folder, file);
-                        timer2.Enabled = true;
+                        PostImage(folder, file == 0 ? 0 : ++file);
+                        Settings.Default.fileposted = file;
+                        Settings.Default.folderposted = folder;
+                        Settings.Default.Save();
+                        timer1.Enabled = true;
                         button3.Text = "Stop posting";
                         notifyIcon.Text = "Bot is working...";
                         tokenTxt.Enabled = false;
@@ -64,6 +66,7 @@ namespace Scheduler_Bot
                         button2.Enabled = false;
                         timeTxt.Enabled = false;
                         button5.Enabled = true;
+                        button6.Enabled = true;
                     }
                 }
             }
@@ -143,15 +146,16 @@ namespace Scheduler_Bot
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (timer2.Enabled)
+            if (timer1.Enabled)
             {
-                timer2.Enabled = false;
+                timer1.Enabled = false;
                 tokenTxt.Enabled = true;
                 chidTxt.Enabled = true;
                 button1.Enabled = true;
                 button2.Enabled = true;
                 timeTxt.Enabled = true;
                 button5.Enabled = false;
+                button6.Enabled = false;
                 Settings.Default.running = false;
                 Settings.Default.Save();
                 button3.Text = "Start posting";
@@ -174,12 +178,11 @@ namespace Scheduler_Bot
                     bot = new TelegramBotClient(tokenTxt.Text);
                     chatId = new ChatId(Convert.ToInt64(chidTxt.Text));
                     folder = 0;
-                    timer1.Interval = Convert.ToInt32(timeTxt.Value * 60 * 1000);
                     posted = 0;
                     PostImage(0, 0);
                     file = 1;
-                    seconds = timer1.Interval / 1000;
-                    timer2.Enabled = true;
+                    seconds = Convert.ToInt32(timeTxt.Value * 60);
+                    timer1.Enabled = true;
                     button3.Text = "Stop posting";
                     notifyIcon.Text = "Bot is working...";
                     tokenTxt.Enabled = false;
@@ -188,6 +191,7 @@ namespace Scheduler_Bot
                     button2.Enabled = false;
                     timeTxt.Enabled = false;
                     button5.Enabled = true;
+                    button6.Enabled = true;
                     Settings.Default.chatId = Convert.ToInt64(chidTxt.Text);
                     Settings.Default.token = tokenTxt.Text;
                     Settings.Default.timer = Convert.ToInt32(timeTxt.Value);
@@ -205,7 +209,7 @@ namespace Scheduler_Bot
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Work()
         {
             PostImage(folder, file++);
             Settings.Default.fileposted = file;
@@ -217,7 +221,7 @@ namespace Scheduler_Bot
             }
             if (folderList.Items.Count == folder)
             {
-                timer2.Enabled = false;
+                timer1.Enabled = false;
                 button3.Text = "Start posting";
                 Settings.Default.fileposted = 0;
                 Settings.Default.folderposted = 0;
@@ -240,17 +244,22 @@ namespace Scheduler_Bot
 
         private void button5_Click(object sender, EventArgs e)
         {
-            timer1_Tick(this, new EventArgs());
+            Work();
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             secTxt.Text = seconds--.ToString();
             if (seconds < 0)
             {
-                timer1_Tick(this, new EventArgs());
+                Work();
                 seconds = timer1.Interval / 1000;
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("File info:\n\nFile number: " + Settings.Default.fileposted + "\nFolder number: " + Settings.Default.folderposted + "\nFile name: " + GetFiles(folder)[file], "File info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
