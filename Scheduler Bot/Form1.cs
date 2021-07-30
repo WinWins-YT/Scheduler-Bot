@@ -253,7 +253,7 @@ namespace Scheduler_Bot
             if (seconds < 0)
             {
                 Work();
-                seconds = timer1.Interval / 1000;
+                seconds = Settings.Default.timer * 60;
             }
         }
 
